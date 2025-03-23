@@ -10,7 +10,9 @@ import PageLayout from "@/layouts/Base.astro";
 import { collectionDateSort } from "@/utils/date";
 
 // Experience
-const experience = await getCollection("experience");
+const experience = (await getCollection("experience")).sort(
+	(a, b) => new Date(b.data.startDate) - new Date(a.data.startDate),
+);
 
 // Projects
 const project = await getCollection("project");
