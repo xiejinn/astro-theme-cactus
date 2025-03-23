@@ -1,0 +1,91 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Pagination from "@/components/Paginator.astro";
+import Experience from "@/components/experience/Experience.astro";
+import PageLayout from "@/layouts/Base.astro";
+import type { GetStaticPaths, Page } from "astro";
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const MAX_EXPERIENCES_PER_PAGE = 10;
+	const allExperiences = await getCollection("experience");
+
+	// Sort experiences by startDate (most recent first)
+	const sortedExperiences = allExperiences.sort((a, b) => {
+		// Extract year from "Month YYYY" format
+		const yearA = parseInt(a.data.startDate.split(" ")[1]);
+		const yearB = parseInt(b.data.startDate.split(" ")[1]);
+
+		// Sort by year (descending)
+		return yearB - yearA;
+	});
+
+	return paginate(sortedExperiences, {
+		pageSize: MAX_EXPERIENCES_PER_PAGE,
+	});
+}) satisfies GetStaticPaths;
+
+interface Props {
+	page: Page<CollectionEntry<"experience">>;
+}
+
+const { page } = Astro.props;
+
+const meta = {
+	description: "My professional experience and work history",
+	title: "Experience",
+};
+
+const paginationProps = {
+	...(page.url.prev && {
+		prevUrl: {
+			text: "← Previous Page",
+			url: page.url.prev,
+		},
+	}),
+	...(page.url.next && {
+		nextUrl: {
+			text: "Next Page →",
+			url: page.url.next,
+		},
+	}),
+};
+---
+
+<PageLayout meta={meta}>
+	<div class="mb-6">
+		<h1 class="title">Experience</h1>
+	</div>
+	<div>
+		<ul class="space-y-8">
+			{
+				page.data.map((exp) => (
+					<li>
+						<div class="flex flex-col">
+							<div class="flex items-center gap-2">
+								<span class="font-semibold text-gray-600 dark:text-gray-400">
+									{exp.data.startDate}
+								</span>
+								<span class="text-gray-400">–</span>
+								{exp.data.endDate === "present" ? (
+									<span class="text-gray-600 dark:text-gray-400">Present</span>
+								) : (
+									<span class="text-gray-600 dark:text-gray-400">{exp.data.endDate}</span>
+								)}
+							</div>
+							<h2 class="text-xl font-bold">
+								<a class="cactus-link" href={`/experience/${exp.id}/`}>
+									{exp.data.title}
+								</a>
+							</h2>
+							{exp.data.organization && (
+								<p class="text-gray-600 dark:text-gray-400">at {exp.data.organization}</p>
+							)}
+							{exp.data.description && <p class="mt-2">{exp.data.description}</p>}
+						</div>
+					</li>
+				))
+			}
+		</ul>
+		<Pagination {...paginationProps} />
+	</div>
+</PageLayout>

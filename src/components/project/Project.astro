@@ -1,0 +1,30 @@
+---
+import { type CollectionEntry, render } from "astro:content";
+import FormattedDate from "@/components/FormattedDate.astro";
+import type { HTMLTag, Polymorphic } from "astro/types";
+
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
+	project: CollectionEntry<"project">;
+	isPreview?: boolean | undefined;
+};
+
+const { as: Tag = "div", project, isPreview = false } = Astro.props;
+const { Content } = await render(project);
+---
+
+<article
+	class:list={[isPreview && "inline-grid rounded-md px-4 py-3"]}
+	data-pagefind-body={isPreview ? false : true}
+>
+	<Tag class="title" class:list={{ "text-base": isPreview }}>
+		{
+			isPreview ? (
+				<a class="cactus-link" href={`/project/${project.id}/`}>
+					{project.data.title}
+				</a>
+			) : (
+				<>{project.data.title}</>
+			)
+		}
+	</Tag>
+</article>

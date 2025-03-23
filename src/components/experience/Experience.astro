@@ -1,0 +1,52 @@
+---
+import { type CollectionEntry, render } from "astro:content";
+import FormattedDate from "@/components/FormattedDate.astro";
+import type { HTMLTag, Polymorphic } from "astro/types";
+
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
+	experience: CollectionEntry<"experience">;
+	withDesc?: boolean;
+};
+
+const { as: Tag = "div", experience, withDesc = false } = Astro.props;
+
+// Only attempt to render if experience exists
+let Content;
+if (experience) {
+	const rendered = await render(experience);
+	Content = rendered.Content;
+}
+---
+
+<div class="flex flex-wrap items-center gap-4">
+	<div class="flex items-center gap-2">
+		<FormattedDate
+			class="font-semibold text-gray-600 dark:text-gray-400"
+			date={new Date(experience.data.startDate)}
+			format="monthYear"
+		/>
+		<span class="text-gray-400">-</span>
+		{
+			experience.data.endDate === "present" ? (
+				<span class="text-gray-600 dark:text-gray-400">Present</span>
+			) : (
+				<FormattedDate
+					class="text-gray-600 dark:text-gray-400"
+					date={new Date(experience.data.endDate)}
+					format="monthYear"
+				/>
+			)
+		}
+	</div>
+
+	<div class="flex items-center gap-2">
+		<a class="cactus-link font-medium" data-astro-prefetch href={`/experience/${experience.id}/`}>
+			{experience.data.title}
+		</a>
+		{
+			experience.data.organization && (
+				<span class="text-gray-600 dark:text-gray-400">at {experience.data.organization}</span>
+			)
+		}
+	</div>
+</div>

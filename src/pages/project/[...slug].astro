@@ -1,0 +1,41 @@
+---
+import { getCollection, render } from "astro:content";
+import PageLayout from "@/layouts/Base.astro";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+
+export const getStaticPaths = (async () => {
+	const projectEntries = await getCollection("project");
+	return projectEntries.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const meta = {
+	title: entry.data.title,
+	description: entry.data.description || `Project: ${entry.data.title}`,
+};
+---
+
+<PageLayout meta={meta}>
+	<div class="experience-header mb-8">
+		<h1 class="title mb-2">{entry.data.title}</h1>
+
+		<div class="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+			<span>{entry.data.startDate}</span>
+			<span>–</span>
+			{entry.data.endDate === "present" ? <span>Present</span> : <span>{entry.data.endDate}</span>}
+
+			{entry.data.organization && <span class="ml-2">at {entry.data.organization}</span>}
+		</div>
+	</div>
+
+	<article class="prose dark:prose-invert max-w-none">
+		<Content />
+	</article>
+</PageLayout>
