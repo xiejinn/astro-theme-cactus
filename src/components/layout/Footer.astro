@@ -1,5 +1,6 @@
 ---
 import { contactLinks, siteConfig } from "@/site.config";
+import { Icon } from "astro-icon/components";
 
 const year = new Date().getFullYear();
 ---
@@ -19,7 +20,7 @@ const year = new Date().getFullYear();
 		{
 			contactLinks.map((link) => (
 				<a class="hover:text-global-text px-4 py-2 hover:underline sm:py-0" href={link.path}>
-					{link.title}
+					<Icon aria-hidden="true" class="h-6 w-6" focusable="false" name={link.icon} />
 				</a>
 			))
 		}

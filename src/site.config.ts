@@ -49,26 +49,20 @@ export const contactLinks: {path: string; title: string; icon: string; text?: st
 	{
 		path: "https://x.com/bellyencours",
 		title: "X",
-		icon: "public/icons/x.svg"
+		icon: "mdi:twitter"
 		
 	},
 	{
 		path: "https://www.linkedin.com/in/isabelleseah/",
 		title: "LinkedIn",
-		icon: "public/icons/linkedin.svg"
+		icon: "mdi:linkedin"
 	},
 	{
 		path: "https://github.com/isabelle-pundix",
 		title: "Work Github",
-		icon: "public/icons/github.svg",
+		icon: "mdi:github",
 		text: "Work"
 	},
-	{
-		path: "https://github.com/xiejinn",
-		title: "Personal Github",
-		icon: "public/icons/github.svg",
-		text: "Personal"
-	}
 ]
 
 // https://expressive-code.com/reference/configuration/

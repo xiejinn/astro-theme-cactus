@@ -18,14 +18,14 @@ if (experience) {
 }
 ---
 
-<div class="flex flex-wrap items-center gap-4">
+<div class="space-y-2">
 	<div class="flex items-center gap-2">
 		<FormattedDate
 			class="font-semibold text-gray-600 dark:text-gray-400"
 			date={new Date(experience.data.startDate)}
 			format="monthYear"
 		/>
-		<span class="text-gray-400">-</span>
+		<span class="text-gray-400">–</span>
 		{
 			experience.data.endDate === "present" ? (
 				<span class="text-gray-600 dark:text-gray-400">Present</span>
@@ -39,14 +39,26 @@ if (experience) {
 		}
 	</div>
 
-	<div class="flex items-center gap-2">
-		<a class="cactus-link font-medium" data-astro-prefetch href={`/experience/${experience.id}/`}>
+	<h2 class="text-lg font-bold">
+		<a
+			class="cactus-link underline-offset-4 hover:underline"
+			href={`/experience/${experience.id}/`}
+		>
 			{experience.data.title}
 		</a>
-		{
-			experience.data.organization && (
-				<span class="text-gray-600 dark:text-gray-400">at {experience.data.organization}</span>
-			)
-		}
-	</div>
+	</h2>
+
+	{
+		experience.data.organization && (
+			<p class="text-gray-600 dark:text-gray-400">at {experience.data.organization}</p>
+		)
+	}
+
+	{
+		withDesc && Content && (
+			<div class="mt-2 text-sm text-gray-700 dark:text-gray-300">
+				<Content />
+			</div>
+		)
+	}
 </div>
