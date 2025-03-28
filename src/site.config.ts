@@ -49,18 +49,18 @@ export const contactLinks: {path: string; title: string; icon: string; text?: st
 	{
 		path: "https://x.com/bellyencours",
 		title: "X",
-		icon: "mdi:twitter"
+		icon: "simple-icons:x"
 		
 	},
 	{
 		path: "https://www.linkedin.com/in/isabelleseah/",
 		title: "LinkedIn",
-		icon: "mdi:linkedin"
+		icon: "simple-icons:linkedin"
 	},
 	{
 		path: "https://github.com/isabelle-pundix",
 		title: "Work Github",
-		icon: "mdi:github",
+		icon: "simple-icons:github",
 		text: "Work"
 	},
 ]
