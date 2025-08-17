@@ -12,6 +12,7 @@ endDate: "present"
 - Implement a suite of Solidity smart contracts supporting dual functionality ERC721 tokens with distinct ownership transfer and usage rights licensing mechanisms
 - Develop real-time contract monitoring tools and event listeners to synchronize high-throughput on-chain activities with off-chain database records
 - Implement extensive testing protocols using fuzz testing, property based testing and integration tests
+- Serve frontend queries via RESTful APIs
 
 2. `ERC20 Token Launcher (Smart contracts + Backend infrastructure + Frontend UI)`
 

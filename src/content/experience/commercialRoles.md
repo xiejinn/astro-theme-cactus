@@ -10,7 +10,7 @@ endDate: "January 2023"
 `Global Presales Associate for an AI startup`
 
 - AI product evangelist with key stakeholders such as government agencies, accelerators and industry leaders
-- Manage sales productivity and optimize deal flow by tailoring business approach to client requirements
+- Perform scoping & technical feasibility analysis with tech teams to synthesize deliverables
 - Deliver product and platform demos to global clients
 - Business questions answered include:
   - HCP perceptions towards drug pre/post launch
