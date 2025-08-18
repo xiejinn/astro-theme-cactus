@@ -53,7 +53,7 @@ const paginationProps = {
 
 <PageLayout meta={meta}>
 	<div class="mb-6">
-		<h1 class="title">Experience</h1>
+		<h1 class="title">Projects</h1>
 	</div>
 	<div>
 		<ul class="space-y-8">
@@ -61,24 +61,13 @@ const paginationProps = {
 				page.data.map((exp) => (
 					<li>
 						<div class="flex flex-col">
-							<div class="flex items-center gap-2">
-								<span class="font-semibold text-gray-600 dark:text-gray-400">
-									{exp.data.startDate}
-								</span>
-								<span class="text-gray-400">–</span>
-								{exp.data.endDate === "present" ? (
-									<span class="text-gray-600 dark:text-gray-400">Present</span>
-								) : (
-									<span class="text-gray-600 dark:text-gray-400">{exp.data.endDate}</span>
-								)}
-							</div>
 							<h2 class="text-xl font-bold">
 								<a class="cactus-link" href={`/project/${exp.id}/`}>
 									{exp.data.title}
 								</a>
 							</h2>
-							{exp.data.organization && (
-								<p class="text-gray-600 dark:text-gray-400">at {exp.data.organization}</p>
+							{exp.data.language && (
+								<p class="mt-2 text-sm text-gray-400">Language: {exp.data.language}</p>
 							)}
 							{exp.data.description && <p class="mt-2">{exp.data.description}</p>}
 						</div>

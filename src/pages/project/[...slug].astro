@@ -18,6 +18,7 @@ const { Content } = await render(entry);
 
 const meta = {
 	title: entry.data.title,
+	language: entry.data.language,
 	description: entry.data.description || `Project: ${entry.data.title}`,
 };
 ---
@@ -25,14 +26,7 @@ const meta = {
 <PageLayout meta={meta}>
 	<div class="experience-header mb-8">
 		<h1 class="title mb-2">{entry.data.title}</h1>
-
-		<div class="flex items-center gap-2 text-gray-600 dark:text-gray-400">
-			<span>{entry.data.startDate}</span>
-			<span>–</span>
-			{entry.data.endDate === "present" ? <span>Present</span> : <span>{entry.data.endDate}</span>}
-
-			{entry.data.organization && <span class="ml-2">at {entry.data.organization}</span>}
-		</div>
+		<h4 class="mb-2 text-gray-400">Language: {entry.data.language}</h4>
 	</div>
 
 	<article class="prose dark:prose-invert max-w-none">

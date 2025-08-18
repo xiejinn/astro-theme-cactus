@@ -1,5 +1,6 @@
 ---
 title: Automating custom smart contracts with evm assembly code
+language: Rust
 description: Tool to dynamically generate efficient and customizable smart contracts using assembly code
 publishDate: "2025-03-23T11:23:00Z"
 ---
