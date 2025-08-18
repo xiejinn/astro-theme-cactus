@@ -58,10 +58,9 @@ export const contactLinks: {path: string; title: string; icon: string; text?: st
 		icon: "simple-icons:linkedin"
 	},
 	{
-		path: "https://github.com/isabelle-pundix",
-		title: "Work Github",
-		icon: "simple-icons:github",
-		text: "Work"
+		path: "https://github.com/izybelly",
+		title: "Github",
+		icon: "simple-icons:github"
 	},
 ]
 
